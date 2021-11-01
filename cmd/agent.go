@@ -6,8 +6,8 @@ import (
   "os"
   "time"
 
-  "github.com/bugfixes/agent_service/agent"
-  "github.com/bugfixes/agent_service/config"
+  "github.com/bugfixes/agent-service/agent"
+  "github.com/bugfixes/agent-service/config"
   bugLog "github.com/bugfixes/go-bugfixes/logs"
   bugfixes "github.com/bugfixes/go-bugfixes/middleware"
   "github.com/go-chi/chi/v5"

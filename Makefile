@@ -10,9 +10,9 @@ setup: ## Get linting stuffs
 
 .PHONY: build-images
 build-images: ## Build the images
-	docker build -t "ghcr.io/bugfixes/agent_service:`git rev-parse HEAD`" --build-arg build=`git rev-parse HEAD` --build-arg version=`git describe --tags --dirty` -f ./docker/Dockerfile .
-	docker tag "ghcr.io/bugfixes/agent_service:`git rev-parse HEAD`" "ghcr.io/bugfixes/agent_service:latest"
-	docker scan "ghcr.io/bugfixes/agent_service:`git rev-parse HEAD`"
+	docker buildx build --platform linux/arm64 --tag "ghcr.io/bugfixes/agent-service:`git rev-parse HEAD`" --build-arg build=`git rev-parse HEAD` --build-arg version=`git describe --tags --dirty` --file ./k8s/Dockerfile .
+	docker tag "ghcr.io/bugfixes/agent-service:`git rev-parse HEAD`" "ghcr.io/bugfixes/agent-service:latest"
+	docker scan "ghcr.io/bugfixes/agent-service:`git rev-parse HEAD`"
 
 .PHONY: build
 build: lint build-images ## Build the app

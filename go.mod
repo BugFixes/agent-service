@@ -1,4 +1,4 @@
-module github.com/bugfixes/agent_service
+module github.com/bugfixes/agent-service
 
 go 1.17
 

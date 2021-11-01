@@ -3,7 +3,7 @@ package agent
 import (
   "context"
 
-  "github.com/bugfixes/agent_service/config"
+  "github.com/bugfixes/agent-service/config"
   bugLog "github.com/bugfixes/go-bugfixes/logs"
   "github.com/google/uuid"
 )
