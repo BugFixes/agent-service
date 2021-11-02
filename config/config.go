@@ -1,7 +1,9 @@
 package config
 
 import (
-	bugLog "github.com/bugfixes/go-bugfixes/logs"
+  "os"
+
+  bugLog "github.com/bugfixes/go-bugfixes/logs"
 	"github.com/caarlos0/env/v6"
 )
 
@@ -19,6 +21,8 @@ type Config struct {
 }
 
 func BuildConfig() (Config, error) {
+  bugLog.Local().Infof("Env: %+v", os.Environ())
+
 	cfg := Config{}
 
 	if err := env.Parse(&cfg); err != nil {
