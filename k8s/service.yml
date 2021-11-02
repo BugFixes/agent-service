@@ -19,7 +19,7 @@ spec:
         - name: regcred
       containers:
         - name: agent-service
-          image: ghcr.io/bugfixes/agent-service:latest
+          image: ghcr.io/bugfixes/agent-service:0.1.4
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
