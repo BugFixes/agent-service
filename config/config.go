@@ -9,7 +9,7 @@ type Local struct {
 	KeepLocal    bool   `env:"LOCAL_ONLY" envDefault:"false"`
 	Development  bool   `env:"DEVELOPMENT" envDefault:"true"`
 	Port         int    `env:"LOCAL_PORT" envDefault:"3000"`
-	VaultAddress string `env:"VAULT_ADDRESS" envDefault:"vault.vault"`
+	VaultAddress string `env:"VAULT_ADDRESS" envDefault:"http://vault.vault"`
 	RDSAddress   string `env:"RDS_ADDRESS" envDefault:"postgres.postgres"`
 }
 

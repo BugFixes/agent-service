@@ -1,12 +1,4 @@
 ---
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: bugfixes
-  labels:
-    name: bugfixes
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -23,6 +15,8 @@ spec:
       labels:
         app: agent-service
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: agent-service
           image: ghcr.io/bugfixes/agent-service:latest
