@@ -12,6 +12,7 @@ import (
   bugfixes "github.com/bugfixes/go-bugfixes/middleware"
   "github.com/go-chi/chi/v5"
   "github.com/go-chi/chi/v5/middleware"
+  "github.com/go-chi/httplog"
   "github.com/keloran/go-probe"
 )
 
@@ -31,9 +32,15 @@ func main() {
 }
 
 func route(cfg config.Config) error {
+  logger := httplog.NewLogger("agent-service", httplog.Options{
+    JSON: true,
+  })
+
 	r := chi.NewRouter()
 	r.Use(middleware.Timeout(60 * time.Second))
 	r.Use(middleware.RequestID)
+  r.Use(httplog.RequestLogger(logger))
+  r.Use(middleware.Heartbeat("/ping"))
 	r.Use(bugfixes.BugFixes)
 
   agentPrefix := ""
