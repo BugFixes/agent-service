@@ -75,10 +75,11 @@ func (ac *AgentClient) CreateAgent(w http.ResponseWriter, r *http.Request) {
 func (ac *AgentClient) GetAgent(w http.ResponseWriter, r *http.Request) {
   vars := r.URL.Query()
   agentID := vars.Get("agent_uuid")
+  bugLog.Local().Debugf("vars: %+v, URL: %+v", vars, r.URL)
 
   if agentID == "" {
     w.WriteHeader(http.StatusBadRequest)
-    jsonError(w, "Missing agent_id", nil)
+    jsonError(w, "Missing agent_uuid", nil)
     return
   }
 
