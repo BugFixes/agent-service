@@ -53,7 +53,7 @@ spec:
     - host: api.bugfixes.dev
       http:
         paths:
-          - path: /agent
+          - path: /v1/agent
             pathType: Prefix
             backend:
               service:

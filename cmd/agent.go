@@ -47,7 +47,9 @@ func route(cfg config.Config) error {
     r.Get("/", agent.NewAgent(cfg).GetAgent)
   })
 
-  r.Get("/probe", probe.HTTP)
+  r.Route("/probe", func(r chi.Router) {
+    r.Get("/", probe.HTTP)
+  })
 
 	bugLog.Local().Infof("Listening on port: %d\n", cfg.Local.Port)
 	if err := http.ListenAndServe(fmt.Sprintf(":%d", cfg.Local.Port), r); err != nil {
