@@ -18,6 +18,7 @@ require (
 	github.com/armon/go-radix v1.0.0 // indirect
 	github.com/cenkalti/backoff/v3 v3.0.0 // indirect
 	github.com/fatih/color v1.7.0 // indirect
+	github.com/go-chi/httplog v0.2.1 // indirect
 	github.com/go-logfmt/logfmt v0.5.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
@@ -55,6 +56,7 @@ require (
 	github.com/mitchellh/reflectwalk v1.0.0 // indirect
 	github.com/oklog/run v1.0.0 // indirect
 	github.com/pierrec/lz4 v2.5.2+incompatible // indirect
+	github.com/rs/zerolog v1.18.1-0.20200514152719-663cbb4c8469 // indirect
 	github.com/ryanuber/go-glob v1.0.0 // indirect
 	go.uber.org/atomic v1.9.0 // indirect
 	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97 // indirect
