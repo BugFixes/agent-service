@@ -26,7 +26,7 @@ func buildDatabase(c *Config) error {
 
 	c.RDS = RDS{
 		Hostname: c.Local.RDSAddress,
-		Database: "bugfixes",
+		Database: "postgres",
 		Username: val["username"].(string),
 		Password: val["password"].(string),
 	}
