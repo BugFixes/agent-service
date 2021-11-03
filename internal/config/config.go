@@ -14,8 +14,8 @@ type Local struct {
 }
 
 type Config struct {
-	Local
-	RDS
+  Local
+  RDS
 }
 
 func BuildConfig() (Config, error) {
