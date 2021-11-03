@@ -14,7 +14,7 @@ type AgentRequest struct {
 }
 
 func jsonError(w http.ResponseWriter, msg string, errs error) {
-  bugLog.Debugf("jsonError: %+v", errs)
+  bugLog.Local().Infof("jsonError: %+v", errs)
 
   w.Header().Set("Content-Type", "text/json")
 	if err := json.NewEncoder(w).Encode(struct {
