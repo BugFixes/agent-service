@@ -1,9 +1,9 @@
 package config
 
 import (
-  "os"
+	"os"
 
-  bugLog "github.com/bugfixes/go-bugfixes/logs"
+	bugLog "github.com/bugfixes/go-bugfixes/logs"
 )
 
 type RDS struct {
@@ -15,9 +15,9 @@ type RDS struct {
 }
 
 func buildDatabase(c *Config) error {
-  if getDatabaseEnvs(c) {
-    return nil
-  }
+	if getDatabaseEnvs(c) {
+		return nil
+	}
 
 	val, err := GetVaultSecrets(c.Local.VaultAddress, "database/creds/agent-role")
 	if err != nil {
@@ -35,25 +35,25 @@ func buildDatabase(c *Config) error {
 }
 
 func getDatabaseEnvs(c *Config) bool {
-  rds := RDS{
-    Database: "postgres",
-  }
-  if username := os.Getenv("RDS_USERNAME"); username != "" {
-    rds.Username = username
-  }
+	rds := RDS{
+		Database: "postgres",
+	}
+	if username := os.Getenv("RDS_USERNAME"); username != "" {
+		rds.Username = username
+	}
 
-  if password := os.Getenv("RDS_PASSWORD"); password != "" {
-    rds.Password = password
-  }
+	if password := os.Getenv("RDS_PASSWORD"); password != "" {
+		rds.Password = password
+	}
 
-  if hostname := os.Getenv("RDS_HOSTNAME"); hostname != "" {
-    rds.Hostname = hostname
-  }
+	if hostname := os.Getenv("RDS_HOSTNAME"); hostname != "" {
+		rds.Hostname = hostname
+	}
 
-  if rds.Hostname != "" && rds.Username != "" && rds.Password != "" {
-    c.RDS = rds
-    return true
-  }
+	if rds.Hostname != "" && rds.Username != "" && rds.Password != "" {
+		c.RDS = rds
+		return true
+	}
 
-  return false
+	return false
 }

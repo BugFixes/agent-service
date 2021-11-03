@@ -1,8 +1,8 @@
 package config
 
 import (
-  bugLog "github.com/bugfixes/go-bugfixes/logs"
-  "github.com/caarlos0/env/v6"
+	bugLog "github.com/bugfixes/go-bugfixes/logs"
+	"github.com/caarlos0/env/v6"
 )
 
 type Local struct {
@@ -14,8 +14,8 @@ type Local struct {
 }
 
 type Config struct {
-  Local
-  RDS
+	Local
+	RDS
 }
 
 func BuildConfig() (Config, error) {

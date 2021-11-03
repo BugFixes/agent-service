@@ -1,10 +1,10 @@
 package agent
 
 import (
-  "encoding/json"
-  "net/http"
+	"encoding/json"
+	"net/http"
 
-  bugLog "github.com/bugfixes/go-bugfixes/logs"
+	bugLog "github.com/bugfixes/go-bugfixes/logs"
 )
 
 type AgentRequest struct {
@@ -14,9 +14,9 @@ type AgentRequest struct {
 }
 
 func jsonError(w http.ResponseWriter, msg string, errs error) {
-  bugLog.Local().Infof("jsonError: %+v", errs)
+	bugLog.Local().Infof("jsonError: %+v", errs)
 
-  w.Header().Set("Content-Type", "text/json")
+	w.Header().Set("Content-Type", "text/json")
 	if err := json.NewEncoder(w).Encode(struct {
 		Error string
 	}{
@@ -43,23 +43,23 @@ func (ac *AgentClient) CreateAgent(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-  finalAgent.AccountID = ar.AccountID
+	finalAgent.AccountID = ar.AccountID
 
-  if exists := ac.FindAgentByNameAndAccount(finalAgent); exists {
-    w.WriteHeader(http.StatusConflict)
-    jsonError(w, "Agent already exists", nil)
-    return
-  }
+	if exists := ac.FindAgentByNameAndAccount(finalAgent); exists {
+		w.WriteHeader(http.StatusConflict)
+		jsonError(w, "Agent already exists", nil)
+		return
+	}
 
-  if err := ac.saveAgent(finalAgent); err != nil {
-    w.WriteHeader(http.StatusInternalServerError)
-    jsonError(w, "failed to save agent", err)
-    return
-  }
+	if err := ac.saveAgent(finalAgent); err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		jsonError(w, "failed to save agent", err)
+		return
+	}
 
 	if err := json.NewEncoder(w).Encode(finalAgent); err != nil {
 		w.WriteHeader(http.StatusCreated)
-    w.Header().Set("Content-Type", "text/json")
+		w.Header().Set("Content-Type", "text/json")
 		_ = json.NewEncoder(w).Encode(struct {
 			AgentID string
 			Key     string
@@ -73,52 +73,52 @@ func (ac *AgentClient) CreateAgent(w http.ResponseWriter, r *http.Request) {
 }
 
 func (ac *AgentClient) GetAgent(w http.ResponseWriter, r *http.Request) {
-  vars := r.URL.Query()
-  agentID := vars.Get("agent_uuid")
-  bugLog.Local().Debugf("vars: %+v, URL: %+v", vars, r.URL)
+	vars := r.URL.Query()
+	agentID := vars.Get("agent_uuid")
+	bugLog.Local().Debugf("vars: %+v, URL: %+v", vars, r.URL)
 
-  if agentID == "" {
-    w.WriteHeader(http.StatusBadRequest)
-    jsonError(w, "Missing agent_uuid", nil)
-    return
-  }
+	if agentID == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		jsonError(w, "Missing agent_uuid", nil)
+		return
+	}
 
-  agent, err := ac.FindAgentByUUID(agentID)
-  if err != nil {
-    w.WriteHeader(http.StatusNotFound)
-    jsonError(w, "Agent not found", err)
-    return
-  }
+	agent, err := ac.FindAgentByUUID(agentID)
+	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
+		jsonError(w, "Agent not found", err)
+		return
+	}
 
-  if err := json.NewEncoder(w).Encode(agent); err != nil {
-    w.WriteHeader(http.StatusInternalServerError)
-    jsonError(w, "Failed to encode agent", err)
-    return
-  }
+	if err := json.NewEncoder(w).Encode(agent); err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		jsonError(w, "Failed to encode agent", err)
+		return
+	}
 }
 
 func (ac *AgentClient) DeleteAgent(w http.ResponseWriter, r *http.Request) {
-  vars := r.URL.Query()
-  agentID := vars.Get("agent_uuid")
+	vars := r.URL.Query()
+	agentID := vars.Get("agent_uuid")
 
-  if agentID == "" {
-    w.WriteHeader(http.StatusBadRequest)
-    jsonError(w, "Missing agent_id", nil)
-    return
-  }
+	if agentID == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		jsonError(w, "Missing agent_id", nil)
+		return
+	}
 
-  agent, err := ac.FindAgentByUUID(agentID)
-  if err != nil {
-    w.WriteHeader(http.StatusNotFound)
-    jsonError(w, "Agent not found", err)
-    return
-  }
+	agent, err := ac.FindAgentByUUID(agentID)
+	if err != nil {
+		w.WriteHeader(http.StatusNotFound)
+		jsonError(w, "Agent not found", err)
+		return
+	}
 
-  if err := ac.RemoveAgent(&agent); err != nil {
-    w.WriteHeader(http.StatusInternalServerError)
-    jsonError(w, "Failed to delete agent", err)
-    return
-  }
+	if err := ac.RemoveAgent(&agent); err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		jsonError(w, "Failed to delete agent", err)
+		return
+	}
 
-  w.WriteHeader(http.StatusNoContent)
+	w.WriteHeader(http.StatusNoContent)
 }

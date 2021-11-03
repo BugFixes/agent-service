@@ -21,11 +21,11 @@ type Credentials struct {
 }
 
 type Agent struct {
-	ID   int `json:"-"`
+	ID   int    `json:"-"`
 	UUID string `json:"agent_id"`
 	Name string `json:"name"`
 
-  Credentials
+	Credentials
 	AccountID string `json:"account_id"`
 }
 
