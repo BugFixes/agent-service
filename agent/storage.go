@@ -61,8 +61,6 @@ func (ac *AgentClient) FindAgentByNameAndAccount(a *Agent) bool {
     }
   }()
 
-  bugLog.Infof("AgentDebug: %+v", a)
-
   var foundAgent string
   if err := conn.QueryRow(
     ac.Context,
@@ -72,6 +70,7 @@ func (ac *AgentClient) FindAgentByNameAndAccount(a *Agent) bool {
     if err == pgx.ErrNoRows {
       return false
     }
+    bugLog.Infof("Found Agent: %+v", foundAgent)
     return true
   }
 
