@@ -36,7 +36,7 @@ func buildDatabase(c *Config) error {
 
 func getDatabaseEnvs(c *Config) bool {
   rds := RDS{
-    Database: "agents",
+    Database: "postgres",
   }
   if username := os.Getenv("RDS_USERNAME"); username != "" {
     rds.Username = username
