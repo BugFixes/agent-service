@@ -61,6 +61,8 @@ func (ac *AgentClient) FindAgentByNameAndAccount(a *Agent) bool {
     }
   }()
 
+  bugLog.Infof("AgentDebug: %+v", a)
+
   var foundAgent string
   if err := conn.QueryRow(
     ac.Context,
