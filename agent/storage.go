@@ -70,8 +70,10 @@ func (ac *AgentClient) FindAgentByNameAndAccount(a *Agent) bool {
     if err == pgx.ErrNoRows {
       return false
     }
-    bugLog.Infof("Found Agent: %+v", foundAgent)
-    return true
+    if len(foundAgent) > 0 {
+      return true
+    }
+    return false
   }
 
   return false
