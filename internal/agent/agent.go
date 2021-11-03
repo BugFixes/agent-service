@@ -1,11 +1,11 @@
 package agent
 
 import (
-  "context"
+	"context"
 
-  "github.com/bugfixes/agent-service/config"
-  bugLog "github.com/bugfixes/go-bugfixes/logs"
-  "github.com/google/uuid"
+	"github.com/bugfixes/agent-service/internal/config"
+	bugLog "github.com/bugfixes/go-bugfixes/logs"
+	"github.com/google/uuid"
 )
 
 //go:generate mockery --name=Agents
@@ -21,7 +21,7 @@ type Credentials struct {
 }
 
 type Agent struct {
-	ID   int `json:"-"`
+	ID   int    `json:"-"`
 	UUID string `json:"agent_id"`
 	Name string `json:"name"`
 
